@@ -172,7 +172,7 @@ Contracts can be as well deployed and as a part of the test.
 #### ETHPM
 [EHTPM](https://www.ethpm.com/)  is a pakage registry.
 
-Packages are treated asn npm depenndencies (`ethpm.json`).
+Packages are treated asn npm depenndencies ([ethpm.json](http://truffleframework.com/docs/getting_started/packages-npm#package-management)).
 
 Command `truffle install package@version` will install referenced package.  
 
