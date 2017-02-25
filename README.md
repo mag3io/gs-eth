@@ -84,12 +84,103 @@ You can now check the balance.
 [Solidity web](hhttps://ethereum.github.io/browser-solidity)
 
 
+## A dev environment
 
+### Truffle
+Truffle [howtos](http://truffleframework.com/docs/getting_started/installation)
 
+#### Installation
+Install Truffle:
+* `npm install -g truffle`
 
-### A dev environment
+Install test RPC client:
+* [EthereumJS TestRPC](https://github.com/ethereumjs/testrpc)
+* `npm install -g ethereumjs-testrpc`
 
-`npm install -g truffle`
+Run test client:
+* `testrpc`
+
+#### Init truffle project structure
+Create truffle_example folder, go in and run :
+* `truffle init`
+
+this will create initial **project structure** :
+* `contracts` : all contracts
+* `migrations` : contract deployments
+* `build` :  built artifacts
+* `test` :  tests
+
+#### Contract compilation
+To compile contracts from `contracts` fodler : 
+* `truffle compile`
+
+#### Contract deployment
+Migrations are used to deploy contracts.
+
+To run migrations from `migrations` folder:
+* `truffle migrate`
+
+#### Testing
+To run all tests from `test` folder:
+* `truffle test`
+
+##### Tests in  JavaScript (.es .es6 .jsx .sol)
+[Mocha](http://mochajs.org/) test framework is used behind,  `describe()` functions
+can be replaced by `contract()` to hook-up clean contract state testing environment before each test.
+
+##### Tests in  Solidity
+Less verbose than JS tests & obviously DSL is more targeted 
+to the very specific task than generic Mocha library.
+ Provides as well  : 
+ * an easy access to all deployed contracts & accounts
+ * assertion library
+ * pre/post-test hooks
+
+#### Interaction with contracts
+Reading data from network is named `call'.
+Writing data is called a `transaction`.
+
+##### Transaction
+Every Tx could be an operation of: 
+* sending money to another account
+* executing a contract's function
+* registering a new contract
+
+ALl transactions:
+* Cost gas (Ether)
+* Change the state of the network
+* Aren't processed immediately
+* Won't expose a return value (only a transaction id).
+
+##### Call
+Can execute code on the network but wothout permanent data changes!
+* Are free (do not cost gas)
+* Do not change the state of the network
+* Are processed immediately
+* Will expose a return value (hooray!)
+
+#### Contract abstractions
+Wrappers around contracts to make interactions with Ethereum contract from JS easier.
+Truffle has own abstraction module : [truffle-contract](https://github.com/trufflesuite/truffle-contract)
+
+Basically `sendCoin`, `getBalanceInEth` and `getBalance` are exposed for interactions.
+All calls, transactions and fired events could be nicely executed and chaine using promises.
+
+Contracts can be as well deployed and as a part of the test.
+
+#### Package management ETHPM
+#### ETHPM
+[EHTPM](https://www.ethpm.com/)  is a pakage registry.
+
+Packages are treated asn npm depenndencies ([ethpm.json](http://truffleframework.com/docs/getting_started/packages-npm#package-management)).
+
+Command `truffle install package@version` will install referenced package.  
+
+To pusblish  see more documentation [here](http://truffleframework.com/docs/getting_started/packages-ethpm#ropsten-ropsten-ropsten)
+
+#### npm
+
+NPM can be used as well to publish ETH artifacts, mores infos can be found [here](http://truffleframework.com/docs/getting_started/packages-npm#package-management)
 
 ## The private net
 
@@ -98,10 +189,7 @@ Follow the steps from [here](https://souptacular.gitbooks.io/ethereum-tutorials-
 
 `--datadir "./.ethereum-private" --genesis CustomGenesis.json --nodiscover --maxpeers 0`
 
-
-
 # Questions
-* qwei?
 * no gas is paid to execute a contract
 
 # Useful links
